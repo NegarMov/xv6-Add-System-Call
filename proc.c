@@ -88,6 +88,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+  p->ctime = ticks;
 
   release(&ptable.lock);
 
@@ -547,7 +548,7 @@ getProcInfo(void)
   cprintf("Running process' info:\n");
   for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
     if(p->state == RUNNING)
-      cprintf(" > %d\n", p->pid);
+      cprintf(" > pid: %d   |   creation timem: %d\n", p->pid, p->ctime);
   }
   return 0;
 }
