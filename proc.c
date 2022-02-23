@@ -539,3 +539,15 @@ getTicks(void)
   cprintf("Clock ticks since system start up: %d\n", ticks);
   return ticks;
 }
+
+int
+getProcInfo(void)
+{
+  struct proc *p;
+  cprintf("Running process' info:\n");
+  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+    if(p->state == RUNNING)
+      cprintf(" > %d\n", p->pid);
+  }
+  return 0;
+}
