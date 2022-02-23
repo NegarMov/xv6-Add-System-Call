@@ -532,3 +532,10 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+int
+getTicks(void)
+{
+  cprintf("Clock ticks since system start up: %d\n", ticks);
+  return ticks;
+}
