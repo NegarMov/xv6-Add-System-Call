@@ -545,10 +545,12 @@ int
 getProcInfo(void)
 {
   struct proc *p;
+  acquire(&ptable.lock);
   cprintf("Running process' info:\n");
-  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
     if(p->state == RUNNING)
-      cprintf(" > pid: %d   |   creation timem: %d\n", p->pid, p->ctime);
+      cprintf(" > pid: %d   |   creation time: %d\n", p->pid, p->ctime);
   }
+  release(&ptable.lock);
   return 0;
 }
